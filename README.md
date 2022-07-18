@@ -23,7 +23,7 @@ The original dataset is from [here](https://grab.is.tue.mpg.de/).
 #### BABEL dataset
 The original dataset is from [here](https://babel.is.tue.mpg.de/).
 #### NTU13 and HumanAct12
-We use the version from [Action2Motion](https://github.com/EricGuo5513/action-to-motion).
+We use the preprocessed version from [Action2Motion](https://github.com/EricGuo5513/action-to-motion).
 
 Note that, we processed all the dataset to discard sequences that are too short or too long. The processed datasets can be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/140d7Bhzy3aUttWuOUBguVLQXJI5b2dou?usp=sharing). Download all the files to ``./data`` folder.
 
