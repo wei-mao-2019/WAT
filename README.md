@@ -28,7 +28,7 @@ We use the preprocessed version from [Action2Motion](https://github.com/EricGuo5
 Note that, we processed all the dataset to discard sequences that are too short or too long. The processed datasets can be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/140d7Bhzy3aUttWuOUBguVLQXJI5b2dou?usp=sharing). Download all the files to ``./data`` folder.
 
 ### Training and Evaluation
-* We provide 4 YAML configs inside ``motion_pred/cfg``: `[dataset]_rnn.yml` and `[dataset]_act_classifier.yml` for the main model and the classifier (for evaluation) respectively. These configs correspond to pretrained models inside ``results``.
+* We provide YAML configs inside ``motion_pred/cfg``: `[dataset]_rnn.yml` and `[dataset]_act_classifier.yml` for the main model and the classifier (for evaluation) respectively. These configs correspond to pretrained models inside ``results``.
 * The training and evaluation command is included in ``run.sh`` file.
 
 ### Citing
