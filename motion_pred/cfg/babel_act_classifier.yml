@@ -1,0 +1,30 @@
+dataset: babel
+save_model_interval: 20
+nz: 128
+t_his: 10
+t_pred: 60
+lambda_v: 1000
+beta: 0.01
+vae_specs:
+  model_name: v4
+  is_bn: true
+  is_dropout: true
+  rnn_type: gru
+  x_birnn: false
+  use_drnn_mlp: true
+
+  # dataset
+  n_action: 20
+  actions: ['stand','walk','step','stretch','sit','place something',
+            'take_pick something up','bend','stand up','jump','throw',
+            'kick','run','catch','wave','squat','punch','jog','kneel','hop']
+  max_len: 300
+  min_len: 30
+  t_pre_extra: 50
+  data_file: './data/babel_30_300_wact_candi_{}.npz'
+  lambdas: [ 100.0, 1000.0, 1.0, 100 ]
+vae_lr: 2.e-3
+batch_size: 64
+num_vae_epoch: 100
+num_vae_epoch_fix: 20
+num_vae_data_sample: 5000

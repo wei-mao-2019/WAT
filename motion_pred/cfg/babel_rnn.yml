@@ -1,0 +1,40 @@
+# semi-supervised action transition max transition fn 75, dct smooth + last frame smooth, with extra future
+dataset: babel
+nz: 256
+t_his: 10
+t_pred: 60
+lambda_v: 1000
+beta: 0.01
+vae_specs:
+# rnn model
+  model_name: v3_5_4
+  rnn_type: gru
+  x_birnn: false
+  use_drnn_mlp: true
+  is_layernorm: false
+  nh_mlp: [512, 256]
+  nh_rnn: 256
+
+# dataset
+  n_action: 20
+  actions: ['stand','walk','step','stretch','sit','place something',
+            'take_pick something up','bend','stand up','jump','throw',
+            'kick','run','catch','wave','squat','punch','jog','kneel','hop']
+  others_all_act: true
+  max_len: 300
+  min_len: 30
+  t_pre_extra: 50
+  data_file: './data/babel_30_300_wact_candi_{}.npz'
+  is_other_act: true
+
+# training
+  lambdas: [ 50.0, 10.0, 10.0, 1.0 ]
+  act_trans_k: 0.08
+  max_trans_fn: 25
+  smooth_N: 10
+  dct_n: 5
+vae_lr: 1.e-3
+batch_size: 64
+num_vae_epoch: 500
+num_vae_epoch_fix: 100
+num_vae_data_sample: 10000

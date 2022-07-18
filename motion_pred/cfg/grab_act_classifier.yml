@@ -1,0 +1,24 @@
+dataset: grab
+save_model_interval: 20
+nz: 128
+t_his: 25
+t_pred: 60
+lambda_v: 1000
+beta: 0.01
+vae_specs:
+  model_name: v4
+  rnn_type: gru
+  x_birnn: false
+  use_drnn_mlp: true
+# dataset
+  n_action: 4
+  actions: [ "pass", "lift", "inspect", "drink" ]
+  max_len: 501
+  min_len: 100
+  data_file: './data/grab_100_501_wact_candi_{}.npz'
+  lambdas: [ 100.0, 1000.0, 1.0, 100 ]
+vae_lr: 2.e-3
+batch_size: 128
+num_vae_epoch: 500
+num_vae_epoch_fix: 100
+num_vae_data_sample: 1000
