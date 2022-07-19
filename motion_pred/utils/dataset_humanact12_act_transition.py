@@ -92,6 +92,9 @@ class DatasetACT12(Dataset):
                k = 0.08,max_trans_fn = 25):
         if action is None:
             action = np.random.choice(self.act_name)
+
+        max_seq_len = self.max_len.item() - self.t_his + t_pre_extra
+
         seq = self.data[action]
         # seq = dict_s[action]
         idx = np.random.randint(0, len(seq))
@@ -106,12 +109,12 @@ class DatasetACT12(Dataset):
         seq_his = seq[:self.t_his][None, :, :]
         seq_tmp = seq[self.t_his:]
         fn = seq_tmp.shape[0]
-        seq_gt = np.zeros([1, self.max_len.item() - self.t_his, seq.shape[-1]])
+        seq_gt = np.zeros([1, max_seq_len, seq.shape[-1]])
         seq_gt[0, :fn] = seq_tmp
         seq_gt[0, fn:] = seq_tmp[-1:]
-        fn_gt = np.zeros([1, self.max_len.item() - self.t_his])
+        fn_gt = np.zeros([1, max_seq_len])
         fn_gt[:, fn - 1] = 1
-        fn_mask_gt = np.zeros([1, self.max_len.item() - self.t_his])
+        fn_mask_gt = np.zeros([1, max_seq_len])
         fn_mask_gt[:, :fn + t_pre_extra] = 1
         label_gt = np.zeros(len(self.act_name))
         # tmp = str.lower(action.split(' ')[0])
@@ -145,13 +148,13 @@ class DatasetACT12(Dataset):
                     if cand_fn + skip_fn + self.t_his > self.max_len:
                         continue
                     # cand_tmp = np.copy(cand[[-1] * (self.max_len.item()-self.t_his)])[None, :, :]
-                    cand_tt = np.zeros([1, self.max_len.item() - self.t_his, seq.shape[-1]])
+                    cand_tt = np.zeros([1, max_seq_len, seq.shape[-1]])
                     cand_tt[0, :skip_fn] = cand_tmp[:1]
                     cand_tt[0, skip_fn:cand_fn + skip_fn] = cand_tmp
                     cand_tt[0, cand_fn + skip_fn:] = cand_tmp[-1:]
-                    fn_tmp = np.zeros([1, self.max_len - self.t_his])
+                    fn_tmp = np.zeros([1, max_seq_len])
                     fn_tmp[:, cand_fn + skip_fn - 1] = 1
-                    fn_mask_tmp = np.zeros([1, self.max_len - self.t_his])
+                    fn_mask_tmp = np.zeros([1, max_seq_len])
                     fn_mask_tmp[:, skip_fn:cand_fn + skip_fn + t_pre_extra] = 1
                     cand_lab = np.zeros(len(self.act_name))
                     cand_lab[np.where(act == self.act_name)[0]] = 1
@@ -177,7 +180,7 @@ class DatasetACT12(Dataset):
         return seq_his, seq_gt, fn_gt, fn_mask_gt, label_gt
 
     def sampling_generator(self, num_samples=1000, batch_size=8, act=None, is_other_act=False, t_pre_extra=0,
-                           act_trans_k=0.08, max_trans_fn=25):
+                           act_trans_k=0.08, max_trans_fn=25, is_transi=False):
         for i in range(num_samples // batch_size):
             samp_his = []
             samp_gt = []
