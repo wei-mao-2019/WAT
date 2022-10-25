@@ -31,6 +31,34 @@ Note that, we processed all the dataset to discard sequences that are too short 
 * We provide YAML configs inside ``motion_pred/cfg``: `[dataset]_rnn.yml` and `[dataset]_act_classifier.yml` for the main model and the classifier (for evaluation) respectively. These configs correspond to pretrained models inside ``results``.
 * The training and evaluation command is included in ``run.sh`` file.
 
+
+### Visualization
+Download smpl-(h,x) models from their official websites and put them in ``./SMPL_models`` folder. The data structure should looks like this 
+```
+SMPL_models
+    ├── smpl
+    │   ├── SMPL_FEMALE.pkl
+    │   └── SMPL_MALE.pkl
+    │
+    ├── smplh
+    │    ├── MANO_LEFT.pkl
+    │    ├── MANO_RIGHT.pkl
+    │    ├── SMPLH_FEMALE.pkl
+    │    └── SMPLH_MALE.pkl
+    │
+    └── smplx
+        │
+        ├── SMPLX_FEMALE.pkl
+        └── SMPLX_MALE.pkl
+```
+Note that when visualize the results of BABEL dataset there may be an error due to the reason that ``SMPLH_(FE)MALE.pkl`` does not contain the hand components. In this case, you may need to manually load the hand components from ``MANO_LEFT(RIGHT).pkl``.
+
+You can then run the following code to render the results of your model to a video.
+
+```Shell
+    python eval_vae_act_render_video.py --cfg grab_rnn --cfg_classifier grab_act_classifier
+```
+
 ### Citing
 
 If you use our code, please cite our work
