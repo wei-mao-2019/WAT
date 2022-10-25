@@ -187,7 +187,7 @@ if __name__ == '__main__':
     """action classifier model"""
     model_classifier = get_action_classifier(cfg_classifier, dataset.traj_dim, max_len=dataset.max_len)
     print(">>> total params: {:.2f}M".format(sum(p.numel() for p in list(model_classifier.parameters())) / 1000000.0))
-    cp_path = cfg_classifier.vae_model_path % 100
+    cp_path = cfg_classifier.vae_model_path % (100 if cfg.dataset == 'babel' else 500)
     print('loading model from checkpoint: %s' % cp_path)
     model_cp = pickle.load(open(cp_path, "rb"))
     model_classifier.load_state_dict(model_cp['model_dict'])
