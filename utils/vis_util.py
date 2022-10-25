@@ -206,7 +206,7 @@ def draw_skeleton_smpl(ax, kpts, parents=[], c='r', marker='o', line_style='-'):
 
 
 def render_videos(sequence, device, save_path, key,
-                  model_path='/home/wei/Documents/projects/2021-motion-generation/GRAB_code/models/',
+                  model_path='./SMPL_models/',
                   w_golbalrot=True, his_frame=10):
     mv = MeshViewer(offscreen=True, width=600, height=900,bg_color=[1.0, 1.0, 1.0, 1.0])
     # mv.viewer.viewer_flags['record'] = True
