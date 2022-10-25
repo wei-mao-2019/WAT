@@ -51,13 +51,15 @@ SMPL_models
         ├── SMPLX_FEMALE.pkl
         └── SMPLX_MALE.pkl
 ```
-Note that when visualize the results of BABEL dataset there may be an error due to the reason that ``SMPLH_(FE)MALE.pkl`` does not contain the hand components. In this case, you may need to manually load the hand components from ``MANO_LEFT(RIGHT).pkl``.
 
 You can then run the following code to render the results of your model to a video.
 
 ```Shell
     python eval_vae_act_render_video.py --cfg grab_rnn --cfg_classifier grab_act_classifier
 ```
+
+
+Note that when visualizing the results of BABEL dataset, there may be an error due to the reason that ``SMPLH_(FE)MALE.pkl`` does not contain the hand components. In this case, you may need to manually load the hand components from ``MANO_LEFT(RIGHT).pkl``.
 
 ### Citing
 
